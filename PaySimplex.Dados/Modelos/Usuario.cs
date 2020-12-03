@@ -6,12 +6,12 @@ using System.Text;
 
 namespace PaySimplex.Dados.Classes
 {
+    [Table("Usuario")]
     public class Usuario
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 IdUsuario { get; set; }
         public String NomeUsuario { get; set; }
-
     }
 }

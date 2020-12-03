@@ -18,6 +18,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PaySimplex.Dados.Modelos;
 using PaySimplex.Dados.Controle;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace testeBackEnd
 {
@@ -35,7 +37,16 @@ namespace testeBackEnd
         {
             services.AddControllers();
             services.AddTransient<ITarefaRepositorio, TarefaRepositorio>();
-            services.AddDbContext<Contexto>(options => options.UseSqlServer(Configuration.GetConnectionString("")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+            services.AddDbContext<Contexto>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "testeBackEnd", Version = "v1", Description = "API testeBackEnd" });
+                c.ResolveConflictingActions(apidescriptions => apidescriptions.First());
+
+                var xmlfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlpath = Path.Combine(AppContext.BaseDirectory, xmlfile);
+                c.IncludeXmlComments(xmlpath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +56,15 @@ namespace testeBackEnd
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint(Configuration.GetValue<string>("SwaggerEndpoint"), "API testeBackEnd");
+                c.RoutePrefix = string.Empty;
+                c.DocumentTitle = "Documentacao testeBackEnd";
+                c.DocExpansion(DocExpansion.None);
+            });
 
             app.UseHttpsRedirection();
 

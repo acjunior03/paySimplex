@@ -7,6 +7,12 @@ namespace PaySimplex.Dados.Controle
           : base(options)
         { }
         public DbSet<Tarefa> TarefaItens { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Tarefa>().HasKey(c => new { c.IdTarefa });
+        }
+
     }
     //public class EnvioArquivoContexto : Microsoft.EntityFrameworkCore.DbContext
     //{

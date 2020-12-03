@@ -12,7 +12,7 @@ namespace PaySimplex.Dados.Modelos
         public TarefaRepositorio(Contexto context)
         {
             _context = context;
-            Add(new Tarefa{IdTarefa=1 ,IdUsuario = 1,Estado = "agendada",DuracaoEstimada = new TimeSpan(1,12,12), DataFim=new DateTimeOffset(DateTime.Now),DataInicio= new DateTimeOffset(DateTime.Now)});
+            //Add(new Tarefa {IdUsuario = 1, Estado = "agendada", DuracaoEstimada = new TimeSpan(1, 12, 12), DataFim = new DateTimeOffset(DateTime.Now), DataInicio = new DateTimeOffset(DateTime.Now) });
         }
         public IEnumerable<Tarefa> GetAll()
         {
