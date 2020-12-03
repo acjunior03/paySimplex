@@ -15,7 +15,5 @@ namespace PaySimplex.Dados.Classes
         public String Nome { get; set; }
         [ForeignKey("Tarefa")]
         public Int64 IdTarefa { get; set; }
-
-
     }
 }

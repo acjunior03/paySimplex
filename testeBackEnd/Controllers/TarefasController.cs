@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace testeBackEnd
+namespace testeBackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TarefaController : ControllerBase
+    public class TarefasController : ControllerBase
     {
         private readonly ITarefaRepositorio _tarefaRepositorio;
-        public TarefaController(ITarefaRepositorio tarefaRepositorio)
+        public TarefasController(ITarefaRepositorio tarefaRepositorio)
         {
             _tarefaRepositorio = tarefaRepositorio;
         }

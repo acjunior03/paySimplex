@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 namespace PaySimplex.Dados.Controle
 {
-    public class TarefaContexto : DbContext
+    public class Contexto : DbContext
     {
-        public TarefaContexto(DbContextOptions<TarefaContexto> options)
+        public Contexto(DbContextOptions<Contexto> options)
           : base(options)
         { }
         public DbSet<Tarefa> TarefaItens { get; set; }
