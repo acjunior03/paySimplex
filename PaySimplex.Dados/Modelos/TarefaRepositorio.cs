@@ -1,6 +1,7 @@
 ﻿using PaySimplex.Dados.Controle;
 using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 
@@ -12,36 +13,30 @@ namespace PaySimplex.Dados.Modelos
         public TarefaRepositorio(Contexto context)
         {
             _context = context;
-            //Add(new Tarefa {IdUsuario = 1, Estado = "agendada", DuracaoEstimada = new TimeSpan(1, 12, 12), DataFim = new DateTimeOffset(DateTime.Now), DataInicio = new DateTimeOffset(DateTime.Now) });
         }
-        public IEnumerable<Tarefa> GetAll()
+        public IEnumerable<Tarefa> BuscarTodos()
         {
-            return _context.TarefaItens.ToList();
+            return _context.TarefaItens.Include(x => x.Usuario).ToList();
         }
-        public void Add(Tarefa item)
+        public void Adicionar(Tarefa item)
         {
             _context.TarefaItens.Add(item);
             _context.SaveChanges();
         }
-        public Tarefa Find(Int64 key)
+        public Tarefa Procurar(Int64 key)
         {
-            return _context.TarefaItens.FirstOrDefault(t => t.IdTarefa == key);
+            return _context.TarefaItens.Include(x => x.Usuario).FirstOrDefault(t => t.IdTarefa == key);
         }
-        public void Remove(Int64 key)
+        public void Remover(Int64 key)
         {
             var entity = _context.TarefaItens.First(t => t.IdTarefa == key);
             _context.TarefaItens.Remove(entity);
             _context.SaveChanges();
         }
-        public void Update(Tarefa item)
+        public void Atualizar(Tarefa item)
         {
             _context.TarefaItens.Update(item);
             _context.SaveChanges();
         }
-
-
-
-
-
     }
 }

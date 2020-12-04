@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PaySimplex.Dados.Classes;
+
+
 namespace PaySimplex.Dados.Controle
 {
     public class Contexto : DbContext
@@ -7,18 +10,12 @@ namespace PaySimplex.Dados.Controle
           : base(options)
         { }
         public DbSet<Tarefa> TarefaItens { get; set; }
+        public DbSet<Usuario> UsuaroItens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Tarefa>().HasKey(c => new { c.IdTarefa });
+            modelBuilder.Entity<Usuario>().HasKey(c => new { c.IdUsuario });
         }
-
     }
-    //public class EnvioArquivoContexto : Microsoft.EntityFrameworkCore.DbContext
-    //{
-    //    public EnvioArquivoContexto(DbContextOptions<EnvioArquivoContexto> options)
-    //      : base(options)
-    //    { }
-    //    public System.Data.Entity.DbSet<EnvioArquivo> EnvioArquivoItens { get; set; }
-    //}
 }

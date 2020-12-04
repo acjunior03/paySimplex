@@ -20,6 +20,7 @@ using PaySimplex.Dados.Modelos;
 using PaySimplex.Dados.Controle;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace testeBackEnd
 {
@@ -65,6 +66,8 @@ namespace testeBackEnd
                 c.DocumentTitle = "Documentacao testeBackEnd";
                 c.DocExpansion(DocExpansion.None);
             });
+
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
